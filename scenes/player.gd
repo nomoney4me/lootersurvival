@@ -16,11 +16,20 @@ func _physics_process(delta: float) -> void:
 		else:
 			$AnimatedSprite2D.animation = "walk-down"
 	move_and_slide()
-	look_at(get_global_mouse_position())
+	#print_debug(get_global_mouse_position())
+	
+	var target = Vector2.ZERO
 
-function fire():
-	var bullet_instance = bullet.instance()
-	bullet_instance.position = get_global_position()
-	bullet_instance.rotation_degrees = rotation_degrees
-	bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
-	get_tree().get_root().call_deferred("add_child", bullet_instance)
+
+	if Input.is_mouse_button_pressed(1): # when click Left mouse button
+		target = get_global_mouse_position()
+	var targetVelocity = global_position.direction_to(target) * speed
+	#print_debug(targetVelocity)
+	
+	#look_at(get_global_mouse_position())
+
+	#var bullet_instance = bullet.instance()
+	#bullet_instance.position = get_global_position()
+	#bullet_instance.rotation_degrees = rotation_degrees
+	#bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
+	#get_tree().get_root().call_deferred("add_child", bullet_instance)
