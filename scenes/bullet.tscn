@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcv061iulqyog"]
+
+[ext_resource type="Texture2D" uid="uid://2gy2otik2j2l" path="res://assets/mystic_woods_free_2.2/sprites/particles/bullet.png" id="1_flrhd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hc2cp"]
+size = Vector2(16, 16)
+
+[node name="Bullet" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hc2cp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_flrhd")
