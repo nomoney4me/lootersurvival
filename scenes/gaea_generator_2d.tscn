@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1xvilpqjl3dx"]
+
+[ext_resource type="Script" path="res://addons/gaea/generators/2D/generator_2d.gd" id="1_sln5g"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/2D/threaded_tilemap_gaea_renderer.gd" id="2_svh7x"]
+
+[node name="GaeaGenerator2D" type="Node"]
+script = ExtResource("1_sln5g")
+
+[node name="ThreadedTilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("generator")]
+script = ExtResource("2_svh7x")
+generator = NodePath("..")
