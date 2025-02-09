@@ -4,9 +4,17 @@ extends Node
 @export var enemy_scene : PackedScene  # The enemy scene to instantiate
 @export var min_spawn_interval = 1.0
 @export var max_spawn_interval = 3.0
-@export var spawn_area = Rect2(0, 0, 1024, 600)  # Example world size
+var spawn_area
 
 func _ready():
+	var viewport = get_viewport()
+	var viewport_rect = viewport.get_visible_rect()
+
+	print("Viewport Width: ", viewport_rect.size.x)
+	print("Viewport Height: ", viewport_rect.size.y)
+
+	# Example: Setting spawn area
+	spawn_area = Rect2(0, 0, viewport_rect.size.x, viewport_rect.size.y)
 	randomize()  # Initialize random number generator
 	$SpawnTimer.wait_time = randf_range(min_spawn_interval, max_spawn_interval)
 	$SpawnTimer.start()
@@ -19,6 +27,7 @@ func spawn_enemy():
 	var random_x = randf_range(spawn_area.position.x, spawn_area.position.x + spawn_area.size.x)
 	var random_y = randf_range(spawn_area.position.y, spawn_area.position.y + spawn_area.size.y)
 	var random_position = Vector2(random_x, random_y)
+	print_debug(random_position)
 
 	# 2. Instantiate the enemy
 	var enemy_instance = enemy_scene.instantiate()

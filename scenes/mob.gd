@@ -27,6 +27,9 @@ func _ready():
 		print("Warning: Player not found!")
 
 func _physics_process(delta):
+	linear_damp = 1.5 # Adjust this value!
+	angular_damp = 1.5 # Adjust this value!
+	
 	if player == null:
 		return  # Player not found, nothing to do
 
