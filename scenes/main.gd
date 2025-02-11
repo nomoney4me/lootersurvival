@@ -7,14 +7,26 @@ extends Node
 var spawn_area
 
 func _ready():
-	var viewport = get_viewport()
-	var viewport_rect = viewport.get_visible_rect()
 
-	print("Viewport Width: ", viewport_rect.size.x)
-	print("Viewport Height: ", viewport_rect.size.y)
+	#var viewport = get_viewport()
+	#var viewport_rect = viewport.get_visible_rect()
+	# Assuming you have a reference to your Camera2D node
+	var camera = $Player/Camera2D
 
-	# Example: Setting spawn area
-	spawn_area = Rect2(0, 0, viewport_rect.size.x, viewport_rect.size.y)
+	# Assuming you have a reference to your Camera2D node
+	#var camera = $Camera2D
+
+	# Get the viewport's visible rectangle
+	var viewport_rect = get_viewport().get_visible_rect()
+
+	# Calculate the camera's visible rectangle in world coordinates
+	var camera_rect = Rect2(
+		camera.position - viewport_rect.size / (2 * camera.zoom),
+		viewport_rect.size / camera.zoom
+	)
+
+	#Example: Setting spawn area
+	spawn_area = Rect2(0, 0, camera_rect.size.x, camera_rect.size.y)
 	randomize()  # Initialize random number generator
 	$SpawnTimer.wait_time = randf_range(min_spawn_interval, max_spawn_interval)
 	$SpawnTimer.start()
